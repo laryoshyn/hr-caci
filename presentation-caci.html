@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CACI AI Workforce Transformation Strategy 2025-2028</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f5f5f5;
+            color: #212121;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #4a90e2 0%, #87CEEB 50%, #E0F6FF 100%);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 40px 60px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 10;
+        }
+
+        .slide.prev {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #003A70;
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #003A70;
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            color: #004B87;
+            font-weight: 500;
+        }
+
+        h4 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #424242;
+            font-weight: 500;
+        }
+
+        p, ul {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #424242;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            padding-left: 24px;
+            position: relative;
+            font-size: 0.95em;
+        }
+
+        li:before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: #003A70;
+            font-weight: bold;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+            border-left: 4px solid #003A70;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 500;
+            color: #003A70;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            color: #757575;
+            margin-top: 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out backwards;
+            border-top: 3px solid #003A70;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .card-compact {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .card-compact:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateX(4px);
+        }
+
+        .risk-high {
+            border-top-color: #d32f2f;
+            border-left: 4px solid #d32f2f;
+        }
+        .risk-medium {
+            border-top-color: #f57c00;
+            border-left: 4px solid #f57c00;
+        }
+        .risk-low {
+            border-top-color: #388e3c;
+            border-left: 4px solid #388e3c;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin: 4px 4px 4px 0;
+        }
+
+        .badge-risk-high { background: #ffcdd2; color: #c62828; }
+        .badge-risk-medium { background: #ffe0b2; color: #e65100; }
+        .badge-risk-low { background: #c8e6c9; color: #2e7d32; }
+        .badge-salary { background: #e1f5fe; color: #01579b; }
+        .badge-year { background: #f3e5f5; color: #6a1b9a; }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background: #ffffff;
+            padding: 12px 24px;
+            border-radius: 28px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn {
+            background: #003A70;
+            border: none;
+            color: #ffffff;
+            padding: 10px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .nav-btn:hover {
+            background: #004B87;
+            box-shadow: 0 4px 8px rgba(0,58,112,0.4);
+            transform: translateY(-2px);
+        }
+
+        .slide-counter {
+            color: #424242;
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .chart-container {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        svg {
+            overflow: visible;
+        }
+
+        .axis text {
+            fill: #424242;
+            font-size: 12px;
+        }
+
+        .axis line, .axis path {
+            stroke: #bdbdbd;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(33, 33, 33, 0.95);
+            color: #ffffff;
+            border-radius: 4px;
+            padding: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9em;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .highlight {
+            color: #003A70;
+            font-weight: 500;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #616161;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .salary-range {
+            display: inline-block;
+            padding: 6px 12px;
+            background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+            color: white;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9em;
+            margin: 4px 0;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 12px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #003A70 0%, #4a90e2 100%);
+            height: 100%;
+            border-radius: 12px;
+            transition: width 1s ease-out;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 0.85em;
+            color: white;
+            font-weight: 500;
+        }
+
+        .role-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .role-title {
+            font-size: 1.15em;
+            font-weight: 500;
+            color: #003A70;
+            margin-bottom: 4px;
+        }
+
+        .role-description {
+            font-size: 0.95em;
+            color: #616161;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .scrollable-content {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: #bdbdbd;
+            border-radius: 4px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+            background: #9e9e9e;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, #1976d2 0%, transparent 100%);
+            margin: 20px 0;
+        }
+
+        strong {
+            color: #212121;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container" id="slideContainer">
+        <!-- Slide 1: Title -->
+        <div class="slide active" data-slide="1">
+            <div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                <h1>CACI AI Workforce Transformation Strategy</h1>
+                <p class="subtitle">Building the Future of National Security Excellence | 2025-2028</p>
+                <div class="grid-3" style="margin-top: 60px;">
+                    <div class="stat-box">
+                        <div class="stat-number">24,000</div>
+                        <div class="stat-label">CACI Employees Impacted</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">$178B</div>
+                        <div class="stat-label">Defense AI Market by 2034</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">Intelligence</div>
+                        <div class="stat-label">CACI's Core Strength</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Executive Summary -->
+        <div class="slide" data-slide="2">
+            <h2>The Strategic Imperative for CACI</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>CACI's Position & Challenges</h3>
+                    <ul>
+                        <li><strong>24,000 employees</strong> supporting national security, intelligence, and defense missions</li>
+                        <li><strong>IT Integrator advantage:</strong> Agile workforce and AI services expertise</li>
+                        <li><strong>Retention challenge:</strong> Maintaining cleared workforce against prime contractor competition</li>
+                        <li><strong>138-140 day</strong> security clearance delays impacting recruitment pipeline</li>
+                        <li><strong>Intelligence Community focus:</strong> 80% of AI roles require TS/SCI clearances</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Market Opportunity for CACI</h3>
+                    <ul>
+                        <li><strong>30%+ annual growth</strong> in defense AI market through 2034</li>
+                        <li><strong>$1.8B annual</strong> DoD AI budget + intelligence community AI investments</li>
+                        <li><strong>Intelligence expertise:</strong> CACI's differentiator in SIGINT, cyber, analytics</li>
+                        <li><strong>First-mover advantage:</strong> Company-wide AI upskilling and badging programs</li>
+                        <li><strong>Capture work:</strong> DoD eliminating 60,000 positions, contractors gain market share</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Displacement Risk Overview -->
+        <div class="slide" data-slide="3">
+            <h2>Job Displacement Risk Landscape</h2>
+            <p class="subtitle">Current defense contractor roles face varying levels of AI-driven transformation</p>
+            <div class="chart-container" id="displacementChart"></div>
+        </div>
+
+        <!-- Slide 4: Category 1 - Current Jobs Affected (ALL ON ONE PAGE) -->
+        <div class="slide" data-slide="4">
+            <h2>Category 1: Current Job Series Affected by AI</h2>
+            <p class="subtitle">Existing defense contractor roles experiencing transformation through 2028</p>
+            <div class="scrollable-content">
+                <div class="grid-2">
+                    <!-- Systems Engineers -->
+                    <div class="card-compact risk-medium">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Systems Engineers</div>
+                                <span class="badge badge-risk-medium">Risk: Medium</span>
+                                <span class="badge badge-salary">$80K-$150K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> Augmentation not replacement. AI handles 30% of design validation through Model-Based Systems Engineering. Lockheed's AI Factory enables 8,000+ engineers to leverage AI for end-to-end development.</p>
+                        <p class="role-description"><strong>Skills Needed:</strong> Digital engineering proficiency, AI/ML model integration, data architecture expertise, MBSE tools, digital twin technology.</p>
+                    </div>
+
+                    <!-- Software Developers -->
+                    <div class="card-compact risk-low">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Software Developers</div>
+                                <span class="badge badge-risk-low">Risk: Low</span>
+                                <span class="badge badge-salary">$85K-$133K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> 20-30% productivity gains through AI-assisted coding. 1.79M national workforce. Developers supervise AI code generation rather than writing from scratch. Booz Allen reports permanent productivity increases.</p>
+                        <p class="role-description"><strong>Skills Needed:</strong> Prompt engineering for code generation, AI model integration, MLOps, security for AI systems. Air-gapped coding assistants for SIPR/JWICS.</p>
+                    </div>
+
+                    <!-- Cybersecurity Analysts -->
+                    <div class="card-compact risk-high">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Cybersecurity Analysts</div>
+                                <span class="badge badge-risk-high">Risk: Medium-High (Entry)</span>
+                                <span class="badge badge-salary">$100K-$200K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> Starkest disruption. AI automates 55-65% of routine threat detection. Some organizations replace entire 80-person teams with AI. Entry-level faces high displacement; senior roles remain in demand. 189,300 positions nationally, 33% projected growth through 2034.</p>
+                        <p class="role-description"><strong>Market Driver:</strong> CMMC 2.0 (Dec 2024) requires 350,000 DIB firms to demonstrate cybersecurity maturity. Salary bifurcation emerging.</p>
+                    </div>
+
+                    <!-- Intelligence Analysts -->
+                    <div class="card-compact risk-medium">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Intelligence Analysts</div>
+                                <span class="badge badge-risk-medium">Risk: Medium</span>
+                                <span class="badge badge-salary">Market Rate</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> AI automates 50-60% of initial data processing and pattern recognition. Pentagon's $200M contracts with Google, xAI, Anthropic, OpenAI target intelligence workflows. Project Maven processes imagery intelligence autonomously.</p>
+                        <p class="role-description"><strong>Role Evolution:</strong> Transition from data collection toward strategic interpretation, understanding adversary intent, identifying patterns across disparate sources.</p>
+                    </div>
+
+                    <!-- Logistics Coordinators -->
+                    <div class="card-compact risk-high">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Logistics Coordinators & Supply Chain</div>
+                                <span class="badge badge-risk-high">Risk: High</span>
+                                <span class="badge badge-salary">Variable</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> AI automates 60-70% of routine coordination tasks. 67% of supply chain executives report full/partial AI automation in 2025. DoD's Replicator Initiative prioritizes autonomous logistics.</p>
+                        <p class="role-description"><strong>Role Evolution:</strong> Coordinators become AI system supervisors and exception handlers. Strategic sourcing specialists remain in medium demand; transactional roles face significant pressure.</p>
+                    </div>
+
+                    <!-- Test Engineers -->
+                    <div class="card-compact risk-high">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Test Engineers & QA Specialists</div>
+                                <span class="badge badge-risk-high">Risk: Highest</span>
+                                <span class="badge badge-salary">Variable</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> Highest displacement risk across all defense roles. 60-80% of test execution now automatable. Manual testing declined 70-80% where AI deployed. Raytheon's flight test automation dramatically reduces manual cycles.</p>
+                        <p class="role-description"><strong>Survival Strategies:</strong> Specialize in test automation architecture, transition to DevSecOps, focus on hardware/physical testing, move into AI model validation.</p>
+                    </div>
+
+                    <!-- Defense Consultants -->
+                    <div class="card-compact risk-medium">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Defense Program Analysts & Consultants</div>
+                                <span class="badge badge-risk-medium">Risk: Medium</span>
+                                <span class="badge badge-salary">Market Rate</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> AI handles 25-50% of research, data analysis, and documentation. Booz Allen's AI consulting track trains non-technical consultants for AI-enabled data storytelling. Role bifurcates: AI-enabled consultants thrive, AI-resistant struggle.</p>
+                        <p class="role-description"><strong>Market Context:</strong> DoD eliminates 60,000 civilian positions through 2026, contractors capture work previously performed in-house. Shift to outcome-based contracting favors AI productivity.</p>
+                    </div>
+
+                    <!-- DevOps Engineers -->
+                    <div class="card-compact risk-low">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">DevOps Engineers</div>
+                                <span class="badge badge-risk-low">Risk: Low</span>
+                                <span class="badge badge-salary">$85K-$130K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> Low displacement risk because role focuses on designing automation systems—precisely the skillset needed in AI-enabled environments. Demand increases as organizations deploy more AI systems requiring orchestration.</p>
+                    </div>
+
+                    <!-- Network Engineers -->
+                    <div class="card-compact risk-medium">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Network Engineers</div>
+                                <span class="badge badge-risk-medium">Risk: Medium</span>
+                                <span class="badge badge-salary">Market Rate</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> AI-powered network optimization automates routine monitoring and configuration. Core architecture expertise remains valuable; routine operations face automation.</p>
+                    </div>
+
+                    <!-- Configuration Management -->
+                    <div class="card-compact risk-medium">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Configuration Management Specialists</div>
+                                <span class="badge badge-risk-medium">Risk: Medium-High</span>
+                                <span class="badge badge-salary">Market Rate</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> 40-50% of documentation automatable through AI. Technical writing and compliance documentation increasingly AI-generated with human oversight.</p>
+                    </div>
+
+                    <!-- Maintenance Technicians -->
+                    <div class="card-compact risk-low">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Maintenance Technicians</div>
+                                <span class="badge badge-risk-low">Risk: Low</span>
+                                <span class="badge badge-salary">Shortage Driving Competition</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Impact:</strong> Hands-on physical work remains irreplaceable. Role transforms through AI augmentation: predictive analytics for maintenance scheduling, XR-guided repairs, digital twin integration for diagnostics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Category 2 - Emerging Roles (ALL ON ONE PAGE) -->
+        <div class="slide" data-slide="5">
+            <h2>Category 2: New Job Series Already Emerging (2023-2025)</h2>
+            <p class="subtitle">Distinct AI-focused roles currently in active recruitment</p>
+            <div class="scrollable-content">
+                <div class="grid-2">
+                    <!-- AI Ethics Officers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Ethics & Responsible AI Specialists</div>
+                                <span class="badge badge-year">Since 2022</span>
+                                <span class="badge badge-salary">$79K-$200K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Emerged in response to DoD's 2022 Responsible AI Strategy. Ensure AI systems align with DoD's five principles: Responsible, Equitable, Traceable, Reliable, Governable. Unlike commercial AI ethics, must address international humanitarian law, rules of engagement, and autonomous weapons ethics.</p>
+                        <p class="role-description"><strong>Skills:</strong> Technical AI/ML understanding, DoD AI Ethical Principles, bias detection/mitigation, international humanitarian law, algorithmic auditing.</p>
+                        <p class="role-description"><strong>Clearance:</strong> Secret to TS/SCI depending on programs.</p>
+                    </div>
+
+                    <!-- Prompt Engineers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Prompt Engineers (Defense)</div>
+                                <span class="badge badge-year">Late 2022</span>
+                                <span class="badge badge-salary">$90K-$140K (TS/SCI)</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Design, test, and refine prompts for LLMs deployed in classified environments. Commercial LLMs refuse military queries; defense needs custom LLMs (Scale AI's Defense Llama) requiring specialized prompting. DoD's Task Force Lima deploys generative AI for mission planning and intelligence synthesis.</p>
+                        <p class="role-description"><strong>Skills:</strong> LLM architecture understanding, military terminology/doctrine, prompt optimization, classified system deployment.</p>
+                        <p class="role-description"><strong>National Baseline:</strong> $62K-$95K; TS/SCI cleared positions command premium.</p>
+                    </div>
+
+                    <!-- Synthetic Data Engineers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Synthetic Data Engineers</div>
+                                <span class="badge badge-year">2022-2023</span>
+                                <span class="badge badge-salary">$100K-$180K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Generate artificial datasets replicating real-world defense scenarios without exposing classified information. Critical bottleneck: AI training data availability in classified environments. Generate synthetic imagery for autonomous weapons, simulated sensor data, photorealistic environments for computer vision.</p>
+                        <p class="role-description"><strong>Impact:</strong> Reduces AI development costs up to 80% compared to real-world data collection.</p>
+                        <p class="role-description"><strong>Skills:</strong> Generative AI (GANs, diffusion models), computer graphics, domain expertise (radar, EO/IR sensors), data privacy/security.</p>
+                    </div>
+
+                    <!-- AI Model Validators -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Model Validators & Adversarial Testing</div>
+                                <span class="badge badge-year">2023-2024</span>
+                                <span class="badge badge-salary">$120K-$200K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Conduct adversarial testing on defense AI systems to identify vulnerabilities before deployment. China and Russia actively develop capabilities to attack U.S. military AI. Develop attack scenarios specific to military contexts (autonomous vehicle spoofing, threat detection evasion).</p>
+                        <p class="role-description"><strong>Skills:</strong> Adversarial machine learning, penetration testing, AI security, red teaming, defense system knowledge.</p>
+                        <p class="role-description"><strong>Clearance Premium:</strong> AI expertise + security knowledge + clearance commands top compensation.</p>
+                    </div>
+
+                    <!-- Human-AI Teaming -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Human-AI Teaming Designers</div>
+                                <span class="badge badge-year">Since 2022</span>
+                                <span class="badge badge-salary">$120K-$190K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Design workflows and interfaces enabling effective collaboration between military personnel and AI agents. DoD emphasizes augmentation rather than replacement. Develop trust-building protocols and training programs for human-AI collaboration.</p>
+                        <p class="role-description"><strong>Focus Areas:</strong> Fighter pilot-AI wingman teaming (Loyal Wingman), intelligence analyst-AI assistant workflows, commander-AI decision support.</p>
+                        <p class="role-description"><strong>Skills:</strong> Human factors engineering, AI system design, military operations, cognitive psychology, UX for high-stakes environments.</p>
+                    </div>
+
+                    <!-- LLM Fine-Tuning Specialists -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">LLM Fine-Tuning Specialists (Classified)</div>
+                                <span class="badge badge-year">2024</span>
+                                <span class="badge badge-salary">$140K-$220K+ (TS/SCI)</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Fine-tune large language models for defense-specific applications on classified networks. Adapt commercial LLMs to military domains, train models for military planning queries commercial models refuse. Highly specialized due to GPU-constrained classified networks and limited cleared ML engineer pool.</p>
+                        <p class="role-description"><strong>Skills:</strong> LLM architecture (transformers), distributed training, model compression/optimization, SIPR/JWICS deployment, military domain knowledge.</p>
+                    </div>
+
+                    <!-- Digital Twin Engineers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Digital Twin Engineers (Defense)</div>
+                                <span class="badge badge-year">2023-2024</span>
+                                <span class="badge badge-salary">$110K-$180K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Create virtual replicas of defense systems, weapons platforms, and operational environments. 73% of A&D organizations established long-term digital twin roadmaps. Implement real-time data integration, enable predictive maintenance, simulate mission scenarios.</p>
+                        <p class="role-description"><strong>Market Context:</strong> McKinsey estimates linking physical/digital worlds could generate $11.1T annually. A&D digital twin investment up 40% YoY.</p>
+                        <p class="role-description"><strong>Skills:</strong> IoT/sensor integration, physics-based modeling, real-time data streaming, 3D visualization, AI/ML for predictive analytics.</p>
+                    </div>
+
+                    <!-- AI Governance Officers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Governance & Compliance Officers</div>
+                                <span class="badge badge-year">2023-2024</span>
+                                <span class="badge badge-salary">$140K-$200K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Ensure defense contractor AI systems comply with DoD requirements, federal regulations, and acquisition standards. DoD's 2023 Data, Analytics, and AI Adoption Strategy requires comprehensive governance. Contractors must demonstrate Responsible AI compliance for contract awards.</p>
+                        <p class="role-description"><strong>Skills:</strong> DoD acquisition regulations, AI policy frameworks, risk management, CDAO requirements, audit/compliance.</p>
+                    </div>
+
+                    <!-- AI Security Engineers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Security Engineers (Model Hardening)</div>
+                                <span class="badge badge-year">2023-2024</span>
+                                <span class="badge badge-salary">$130K-$200K+</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Distinct from traditional cybersecurity. Implement security measures protecting defense AI models from adversarial attacks. Develop defensive distillation techniques, design secure model deployment pipelines. Traditional cybersecurity focuses on networks; AI security addresses AI-specific attack vectors.</p>
+                        <p class="role-description"><strong>Skills:</strong> Adversarial ML, model robustness, secure enclaves, cryptography for ML, threat modeling for AI systems.</p>
+                    </div>
+
+                    <!-- AI Integration Managers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Integration Specialists & Managers</div>
+                                <span class="badge badge-year">2023-2024</span>
+                                <span class="badge badge-salary">$120K-$250K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Manage end-to-end integration of AI capabilities into defense systems and workflows as AI moves from proof-of-concept to operational deployment. Coordinate across engineering, operations, and acquisition teams.</p>
+                        <p class="role-description"><strong>Skills:</strong> Program management, AI/ML technical knowledge, DoD acquisition, change management, systems integration.</p>
+                        <p class="role-description"><strong>Salary Range:</strong> $120K-$180K mid-level, $150K-$250K+ senior AI program managers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Category 3 - Future Roles (ALL ON ONE PAGE) -->
+        <div class="slide" data-slide="6">
+            <h2>Category 3: Future Job Series Not Yet Emerging (2026-2028)</h2>
+            <p class="subtitle">Roles potentially necessary as AI systems mature and scale</p>
+            <div class="scrollable-content">
+                <div class="grid-2">
+                    <!-- AI Constitutional Architects -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Constitutional Design Architects</div>
+                                <span class="badge badge-year">Early 2026</span>
+                                <span class="badge badge-salary">$150K-$220K+</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Translate DoD Ethical AI Principles and Directive 3000.09 into executable technical specifications for autonomous weapon systems. As autonomous weapons move from concept to deployment (Loyal Wingman, autonomous maritime vehicles, AI missile defense), need specialists bridging policy, ethics, and technical implementation.</p>
+                        <p class="role-description"><strong>Skills:</strong> International humanitarian law, rules of engagement, technical AI/ML architecture, safety-critical systems engineering, policy interpretation, scenario modeling for edge cases.</p>
+                    </div>
+
+                    <!-- Synthetic Workforce Coordinators -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Synthetic Workforce Coordination Managers</div>
+                                <span class="badge badge-year">Mid-2026 to 2027</span>
+                                <span class="badge badge-salary">$130K-$250K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Manage "teams" of AI agents working collaboratively on defense missions. Once individual AI systems prove valuable, operations will deploy multiple specialized AIs requiring coordination. Coordinate data processing, target recognition, mission planning, logistics optimization AIs working together.</p>
+                        <p class="role-description"><strong>Skills:</strong> AI system orchestration, multi-agent systems, game theory, military operational planning, API integration, conflict resolution between AI recommendations.</p>
+                    </div>
+
+                    <!-- Cross-Domain AI Integration -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Cross-Domain AI Integration Specialists</div>
+                                <span class="badge badge-year">Immediate (2026)</span>
+                                <span class="badge badge-salary">$140K-$210K+ (TS/SCI)</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Critical immediately as AI systems need data across classified/unclassified network boundaries. AI requires massive data access; defense data exists across multiple security classifications. Traditional Cross-Domain Solutions handle file transfers; AI needs real-time data streaming, model synchronization, result sharing.</p>
+                        <p class="role-description"><strong>Skills:</strong> Cross-domain solution architecture, AI/ML pipeline engineering, security clearance/accreditation processes, network architecture across SIPR/NIPR/coalition networks.</p>
+                    </div>
+
+                    <!-- AI Incident Reconstruction -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Incident Reconstruction Analysts</div>
+                                <span class="badge badge-year">Late 2026</span>
+                                <span class="badge badge-salary">$130K-$200K+</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Investigate AI system failures, accidents, and anomalous behaviors in defense applications. Unlike human error, AI failures involve complex interactions between training data, model architecture, environmental conditions, adversarial actions. First major AI incident will create immediate demand.</p>
+                        <p class="role-description"><strong>Skills:</strong> Digital forensics, reverse engineering, AI/ML model interpretability, military accident investigation protocols, adversarial ML attack detection.</p>
+                    </div>
+
+                    <!-- Human-Machine Workload Calibration -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Human-Machine Workload Calibration Specialists</div>
+                                <span class="badge badge-year">2027</span>
+                                <span class="badge badge-salary">$120K-$180K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Optimize cognitive load distribution between humans and AI systems in operational environments. As soldiers manage multiple drones plus autonomous ground vehicles, or analysts supervise multiple AI systems, cognitive load becomes critical operational constraint.</p>
+                        <p class="role-description"><strong>Skills:</strong> Human factors engineering, cognitive psychology, AI system behavior modeling, military operations analysis, workload assessment methodologies.</p>
+                    </div>
+
+                    <!-- AI Capability Forecasting -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Capability Forecasting Analysts</div>
+                                <span class="badge badge-year">2027</span>
+                                <span class="badge badge-salary">$130K-$200K+</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Predict and assess adversary AI capabilities as China and Russia deploy operational AI systems. Combines intelligence analysis with technical AI expertise and technology forecasting—rare combination. Focus on second and third-order effects of Chinese and Russian AI programs.</p>
+                        <p class="role-description"><strong>Skills:</strong> Intelligence analysis, OSINT, technical AI/ML expertise to assess capability claims, understanding of Chinese/Russian defense industry, technology forecasting.</p>
+                    </div>
+
+                    <!-- AI Workforce Transition Coordinators -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Workforce Transition Coordinators</div>
+                                <span class="badge badge-year">2027-2028</span>
+                                <span class="badge badge-salary">$110K-$200K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Manage human workforce impacts from AI deployment as displacement reaches significant scale. Identify displaced roles, design retraining programs, create new career pathways, ensure equitable AI adoption. Currently largely unplanned despite inevitable restructuring.</p>
+                        <p class="role-description"><strong>Skills:</strong> Change management, organizational development, adult learning theory, training design, labor economics, workforce analytics, AI capability assessment.</p>
+                    </div>
+
+                    <!-- Quantum-AI Integration Engineers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Quantum-AI Integration Engineers</div>
+                                <span class="badge badge-year">2028</span>
+                                <span class="badge badge-salary">$160K-$240K+</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Develop hybrid systems as quantum computing reaches "practical utility" for specific defense applications. Pentagon FY2026 allocates $2.2B for AI + quantum with explicit focus on convergence. Quantum offers advantages for optimization problems, enhanced sensing, cryptography.</p>
+                        <p class="role-description"><strong>Skills:</strong> Quantum computing principles/programming (Qiskit, Cirq), classical AI/ML expertise, optimization algorithms, understanding of NISQ devices, quantum-safe AI security.</p>
+                    </div>
+
+                    <!-- AI Trust Calibration -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Trust Calibration Engineers</div>
+                                <span class="badge badge-year">Late 2027</span>
+                                <span class="badge badge-salary">$130K-$200K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Design systems building appropriate trust levels between operators and AI systems—addressing both over-reliance and under-utilization. Critical for operational effectiveness as AI systems scale.</p>
+                    </div>
+
+                    <!-- AI Legacy System Interpreters -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Legacy System Interpreters</div>
+                                <span class="badge badge-year">2028</span>
+                                <span class="badge badge-salary">$120K-$180K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Maintain, debug, and update older AI models no longer fully understood but remaining operational in critical defense infrastructure. As AI systems age, understanding their behavior becomes challenging.</p>
+                    </div>
+
+                    <!-- Multi-Domain AI Orchestration -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Multi-Domain AI Orchestration Architects</div>
+                                <span class="badge badge-year">Late 2027-2028</span>
+                                <span class="badge badge-salary">$150K-$220K+</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Design AI-enabled operations across air, land, sea, space, and cyber domains simultaneously for JADC2 (Joint All-Domain Command and Control). Requires understanding of multi-domain warfare and AI orchestration.</p>
+                    </div>
+
+                    <!-- AI-AI Conflict Resolution -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI-AI Conflict Resolution Specialists</div>
+                                <span class="badge badge-year">2028</span>
+                                <span class="badge badge-salary">$140K-$210K</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Resolve conflicts when multiple AI systems provide contradictory recommendations in time-critical situations. Design decision frameworks for AI conflict resolution.</p>
+                    </div>
+
+                    <!-- Neuromorphic Computing -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">Neuromorphic Computing Specialists</div>
+                                <span class="badge badge-year">2028</span>
+                                <span class="badge badge-salary">$150K-$220K+</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Develop brain-inspired computing architectures offering advantages in power efficiency for edge deployment in autonomous systems and sensors.</p>
+                    </div>
+
+                    <!-- AI Constitutional Crisis Managers -->
+                    <div class="card-compact">
+                        <div class="role-header">
+                            <div>
+                                <div class="role-title">AI Constitutional Crisis Managers</div>
+                                <span class="badge badge-year">2028</span>
+                                <span class="badge badge-salary">$180K-$250K+</span>
+                            </div>
+                        </div>
+                        <p class="role-description"><strong>Purpose:</strong> Manage high-stakes scenarios where AI systems malfunction during operations. Provide "break glass" authority and emergency decision-making protocols for AI failures in combat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Salary Comparison -->
+        <div class="slide" data-slide="7">
+            <h2>Salary Landscape: Defense vs. Commercial Tech</h2>
+            <p class="subtitle">Clearance premiums offset but don't eliminate compensation gap</p>
+            <div class="chart-container" id="salaryChart"></div>
+            <div class="grid-3" style="margin-top: 20px;">
+                <div class="stat-box">
+                    <div class="stat-number">+12%</div>
+                    <div class="stat-label">Defense Premium for AI Roles</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">$127K</div>
+                    <div class="stat-label">Average TS/SCI Cleared Salary</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">10-20%</div>
+                    <div class="stat-label">Top Secret Clearance Premium</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Talent War -->
+        <div class="slide" data-slide="8">
+            <h2>The Talent War: CACI Must Win or Become Irrelevant</h2>
+            <p class="subtitle">79% of cleared workers job-hunting RIGHT NOW. We're not competing—we're bleeding out.</p>
+            <div class="grid-2">
+                <div class="card risk-high">
+                    <h3>The Brutal Reality: Why We're Losing</h3>
+                    <p style="font-size: 1.1em; color: #d32f2f; font-weight: 500; margin-bottom: 15px;">"It's NOT the pay—we pay 12% MORE than tech. It's everything else."</p>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>PowerPoint prison:</strong> Hiring $180K AI engineers for slide decks. Fastest way to lose talent = waste their skills.</li>
+                        <li><strong>8-month clearance death spiral:</strong> Doubled from 2023. Candidates accept other offers while waiting. We lose 40-60% before Day 1.</li>
+                        <li><strong>Infrastructure embarrassment:</strong> Telling AI engineers "no GPUs on classified networks." Competing with Stone Age tools.</li>
+                        <li><strong>Career dead-ends:</strong> Only path is management. No technical fellow track. No distinguished engineer roles.</li>
+                        <li><strong>13% annual turnover catastrophe:</strong> 3.4x national average. Losing 3,120 of 24,000 employees EVERY YEAR.</li>
+                        <li><strong>Mission disconnect:</strong> Not showing impact. Bureaucracy > meaningful national security work.</li>
+                    </ul>
+                    <div style="margin-top: 15px; padding: 15px; background: rgba(211, 47, 47, 0.15); border-radius: 4px;">
+                        <p style="margin: 0; font-weight: 500;">At 13% turnover, we lose $312M+ annually in recruiting, training, clearance processing, and lost productivity.</p>
+                    </div>
+                </div>
+                <div class="card" style="border-top: 4px solid #2e7d32; border-left: 4px solid #2e7d32;">
+                    <h3>Aggressive Counter-Offensive: Win the War</h3>
+                    <p style="font-size: 1.05em; color: #2e7d32; font-weight: 500; margin-bottom: 15px;">CACI's 90-Day Talent Blitz</p>
+                    <ul>
+                        <li><strong>ELIMINATE PowerPoint duty TODAY:</strong> Audit all AI/ML roles in next 30 days. Anyone doing >30% non-technical work gets reassigned. No exceptions.</li>
+                        <li><strong>Infrastructure modernization sprint:</strong> Deploy classified LLMs, GPU clusters, modern dev tools by Q2 2025. $50M investment pays for itself in 6 months through retention.</li>
+                        <li><strong>Create technical career ladder NOW:</strong> Announce Principal Engineer, Distinguished Engineer, Technical Fellow tracks by March 2025. Match FAANG compensation at senior levels.</li>
+                        <li><strong>Hybrid-first policy:</strong> Default to remote for cleared AI roles. Office presence = exception, not rule. Saves $15K-$20K per role in effective comp.</li>
+                        <li><strong>Clearance acceleration task force:</strong> Dedicate team to shepherd every clearance. Cut 138 days to 90 days through white-glove process. Track daily.</li>
+                        <li><strong>Mission impact storytelling:</strong> Every AI engineer sees how their work protects warfighters. Quarterly briefings from intel customers. Make the mission REAL.</li>
+                        <li><strong>Steal best practices:</strong> Copy Kessel Run, Defense Digital Service, Army Software Factory models. Send leaders to embed for 30 days. Implement learnings immediately.</li>
+                        <li><strong>Retention incentives with teeth:</strong> $25K-$50K bonuses for critical AI roles. Vesting over 24 months. Golden handcuffs that actually work.</li>
+                    </ul>
+                    <div style="margin-top: 15px; padding: 15px; background: rgba(46, 125, 50, 0.15); border-radius: 4px;">
+                        <p style="margin: 0; font-weight: 500;">Target: Cut turnover from 13% to 6% by end 2025. Savings: $156M annually + competitive advantage worth 10x that.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: rgba(0, 58, 112, 0.1); border-left: 4px solid #003A70; border-radius: 4px;">
+                <p style="font-size: 1.2em; color: #212121; margin: 0;"><strong>Non-Negotiable Truth:</strong> Palantir pays LESS than CACI for AI roles but has 90%+ retention. They win on culture, mission, and treating engineers like engineers—not PowerPoint operators. We have every advantage except execution. FIX IT.</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Build Buy Borrow Partner -->
+        <div class="slide" data-slide="9">
+            <h2>Four-Pillar Talent Strategy</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>BUILD</h3>
+                    <p><strong>Internal development of core technical roles</strong></p>
+                    <ul>
+                        <li>Booz Allen "AI Ready" program (⅓ of employees)</li>
+                        <li>Lockheed AI Factory (8,000+ engineers enabled)</li>
+                        <li>Leidos upskilling (3,000+ employees)</li>
+                        <li>XR training for knowledge transfer from retiring workforce</li>
+                        <li>Apprenticeships in advanced manufacturing (3x increase FY2021-FY2023)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>BUY</h3>
+                    <p><strong>Aggressive external recruitment</strong></p>
+                    <ul>
+                        <li>Cutting-edge AI/software specialists</li>
+                        <li>Comprehensive value proposition beyond salary</li>
+                        <li>Mission impact emphasis</li>
+                        <li>Clearance as marketable credential</li>
+                        <li>80% of defense AI roles require clearances (8+ month bottleneck)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid-2" style="margin-top: 20px;">
+                <div class="card">
+                    <h3>BORROW</h3>
+                    <p><strong>DoD SkillBridge program - massive untapped opportunity</strong></p>
+                    <ul>
+                        <li>4,945 authorized contractor organizations</li>
+                        <li>8,494 active opportunities</li>
+                        <li>90% job placement rate</li>
+                        <li>180 days paid military transition training</li>
+                        <li>Large orgs: minimum 5 candidates annually at $52K+ salary</li>
+                        <li>Updated 2024 requirements mandate participation</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>PARTNER</h3>
+                    <p><strong>Academic collaborations create talent pipelines</strong></p>
+                    <ul>
+                        <li>Air Force-MIT AI Accelerator</li>
+                        <li>Lockheed-USC space engineering programs</li>
+                        <li>Local ecosystem approaches</li>
+                        <li>Community college partnerships</li>
+                        <li>Skills-based hiring advocacy (address U.S. STEM degree shortage)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Transformation Timeline -->
+        <div class="slide" data-slide="10">
+            <h2>Organizational Transformation: Execute or Fall Behind</h2>
+            <p class="subtitle">Competitors are moving now. Delay equals market share loss.</p>
+            <div class="grid-3">
+                <div class="card" style="border-top: 4px solid #d32f2f;">
+                    <h3>IMMEDIATE ACTION (Q1-Q2 2025)</h3>
+                    <p style="color: #d32f2f; font-weight: 500; margin-bottom: 12px;">COMPLIANCE DEADLINES ARE NOT NEGOTIABLE</p>
+                    <ul>
+                        <li><strong>DoD 8140 certification blitz</strong> - Feb 2025/2026 deadlines. Non-compliance = contract loss. Certify 5,000+ employees in 90 days.</li>
+                        <li><strong>CMMC 2.0 capture</strong> - 350,000 DIB firms need compliance. First movers win $4.7B+ market. Hire 200+ cyber professionals NOW.</li>
+                        <li><strong>AI pilot deployment</strong> - Launch 3 high-impact use cases by March 2025. Measure productivity gains. Scale winners immediately.</li>
+                        <li><strong>Stop the talent hemorrhage</strong> - Implement retention bonuses TODAY. 79% of cleared workers job-hunting. Emergency intervention required.</li>
+                        <li><strong>SkillBridge activation</strong> - Recruit 50+ transitioning military AI/cyber specialists in Q1. 90% placement rate. Free training period.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-top: 4px solid #f57c00;">
+                    <h3>AGGRESSIVE SCALING (2025-2026)</h3>
+                    <p style="color: #f57c00; font-weight: 500; margin-bottom: 12px;">BUILD THE COMPETITIVE MOAT</p>
+                    <ul>
+                        <li><strong>AI literacy for ALL 24,000 employees</strong> - Not optional. Mandatory badging program. Complete by Dec 2025. Link to performance reviews.</li>
+                        <li><strong>Classified LLM deployment</strong> - SIPR/JWICS generative AI by Q3 2025. Defense Llama integration. Enable 5,000+ analysts immediately.</li>
+                        <li><strong>Intelligence community AI dominance</strong> - Leverage CACI's SIGINT/cyber expertise. Capture ODNI AI contracts. Differentiate from primes.</li>
+                        <li><strong>Productivity or perish</strong> - Achieve 20-30% efficiency gains through AI by end 2025. Track revenue per employee. Board-level metrics.</li>
+                        <li><strong>Acquisition strategy</strong> - Identify and acquire 2-3 AI startups with cleared talent pools. Speed > build time.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-top: 4px solid #003A70;">
+                    <h3>MARKET LEADERSHIP (2027-2028)</h3>
+                    <p style="color: #003A70; font-weight: 500; margin-bottom: 12px;">SEPARATE FROM THE PACK</p>
+                    <ul>
+                        <li><strong>Employer of choice status</strong> - Top 3 defense contractor for AI talent. <90 day time-to-fill. >90% retention for AI roles.</li>
+                        <li><strong>Proprietary AI capabilities</strong> - Intelligence community-specific AI models. JADC2 integration expertise. Unmatched clearance + AI talent density.</li>
+                        <li><strong>40% revenue from AI-enabled work</strong> - Transform from labor provider to AI-augmented services. Premium pricing. Higher margins.</li>
+                        <li><strong>Pipeline dominance</strong> - 15+ university partnerships producing 2,000+ AI-ready graduates annually. SkillBridge program at 500+ participants.</li>
+                        <li><strong>Policy influence</strong> - Lead AIA/NDIA working groups. Shape DoD AI acquisition policy. Write the rules competitors must follow.</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: rgba(211, 47, 47, 0.1); border-left: 4px solid #d32f2f; border-radius: 4px;">
+                <p style="font-size: 1.15em; color: #212121; margin: 0;"><strong>Reality Check:</strong> Palantir, Anduril, and Booz Allen are executing these strategies NOW. Every quarter of delay costs market position we may never recover.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Market Growth -->
+        <div class="slide" data-slide="11">
+            <h2>Market Growth & Workforce Projections</h2>
+            <div class="chart-container" id="marketGrowthChart"></div>
+            <div class="grid-3" style="margin-top: 30px;">
+                <div class="stat-box">
+                    <div class="stat-number">43.61%</div>
+                    <div class="stat-label">Defense AI CAGR 2024-2028</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">70K+</div>
+                    <div class="stat-label">More Cleared Positions Than People</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">33%</div>
+                    <div class="stat-label">Cybersecurity Growth Through 2034</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: C-Suite Recommendations -->
+        <div class="slide" data-slide="12">
+            <h2>Strategic Recommendations for C-Suite</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Immediate (Next 90 Days)</h3>
+                    <ul>
+                        <li><strong>Comprehensive workforce assessment</strong> - Map AI capabilities and gaps across organization</li>
+                        <li><strong>Establish AI governance</strong> - CEO/C-suite ownership driving transformation</li>
+                        <li><strong>Pilot workflow redesign</strong> - High-value use case measuring EBIT impact</li>
+                        <li><strong>Activate DoD SkillBridge</strong> - Enroll 5+ participants (large orgs)</li>
+                        <li><strong>Review compensation strategy</strong> - Benchmark AI roles +12% target, implement retention bonuses</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Near-Term (6-12 Months)</h3>
+                    <ul>
+                        <li><strong>Scale reskilling programs</strong> - Target 50K-100K employees needing skills transformation</li>
+                        <li><strong>Modernize IT infrastructure</strong> - Meet industry standards, enable modern development</li>
+                        <li><strong>Redesign talent processes</strong> - Streamline hiring, reduce from 8+ months</li>
+                        <li><strong>Build 2-3 strategic university partnerships</strong> - Create sustainable talent pipelines</li>
+                        <li><strong>Establish success metrics</strong> - Quarterly board reporting on transformation progress</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid-2" style="margin-top: 20px;">
+                <div class="card">
+                    <h3>Medium-Term (1-2 Years)</h3>
+                    <ul>
+                        <li><strong>Organizational restructuring</strong> - Flatten technical hierarchies, create AI Centers of Excellence</li>
+                        <li><strong>Transform recruitment marketing</strong> - Eliminate jargon, emphasize mission impact</li>
+                        <li><strong>Deploy AI at scale</strong> - Expand pilots enterprise-wide, achieve 20-30% productivity gains</li>
+                        <li><strong>Workforce transition management</strong> - Implement HR levers, redeploy legacy to AI-enabled roles</li>
+                        <li><strong>Industry collaboration</strong> - Active NDIA/AIA participation, pre-competitive best practices</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Long-Term (2-5 Years)</h3>
+                    <ul>
+                        <li><strong>Employer of choice for AI talent</strong> - >90% retention, <90 days time-to-fill</li>
+                        <li><strong>Lead industry in AI adoption</strong> - AI fully integrated into products/services</li>
+                        <li><strong>Sustainable talent pipeline</strong> - 10+ university partnerships, 1,000+ annual SkillBridge</li>
+                        <li><strong>Shape policy environment</strong> - Influence acquisition reform, workforce legislation</li>
+                        <li><strong>Competitive differentiation</strong> - Proprietary AI capabilities, speed-to-market through digital maturity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Competitive Positioning -->
+        <div class="slide" data-slide="13">
+            <h2>CACI's Competitive Positioning as an IT Integrator</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Large Primes</h3>
+                    <p style="font-size: 0.95em; color: #757575; margin-bottom: 12px;">Lockheed, Northrop, Raytheon, Boeing</p>
+                    <p><strong>Their Advantages:</strong></p>
+                    <ul>
+                        <li>Scale and cleared workforce</li>
+                        <li>Long-term relationships</li>
+                        <li>Resources for AI platforms</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>Their Challenges:</strong></p>
+                    <ul>
+                        <li>Slow to adopt software-centric culture</li>
+                        <li>Bureaucratic hiring processes</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-top: 4px solid #003A70; border-left: 4px solid #003A70;">
+                    <h3>CACI - IT Integrator Leader</h3>
+                    <p style="font-size: 0.95em; color: #757575; margin-bottom: 12px;">24,000 employees | Intelligence Community Focus</p>
+                    <p><strong>CACI's Key Advantages:</strong></p>
+                    <ul>
+                        <li><strong>Agile workforce:</strong> Faster hiring & training cycles</li>
+                        <li><strong>Intelligence expertise:</strong> SIGINT, cyber, data analytics</li>
+                        <li><strong>Cleared talent pool:</strong> Deep IC relationships</li>
+                        <li><strong>Niche specialization:</strong> Mission-critical AI/ML</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>CACI's Strategy:</strong></p>
+                    <ul>
+                        <li>Company-wide AI upskilling (5,000+ annually)</li>
+                        <li>Badging/certification programs</li>
+                        <li>Intelligence community differentiation</li>
+                        <li>Strategic talent retention programs</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Defense Tech Startups</h3>
+                    <p style="font-size: 0.95em; color: #757575; margin-bottom: 12px;">Palantir, Anduril, Shield AI</p>
+                    <p><strong>Their Advantages:</strong></p>
+                    <ul>
+                        <li>AI-native culture</li>
+                        <li>Silicon Valley networks</li>
+                        <li>Venture backing</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>Their Challenges:</strong></p>
+                    <ul>
+                        <li>Limited cleared workforce scale</li>
+                        <li>Acquisition process navigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Risks -->
+        <div class="slide" data-slide="14">
+            <h2>What Could Go Wrong</h2>
+            <div class="grid-2">
+                <div class="card risk-high">
+                    <h3>Critical Risks</h3>
+                    <ul>
+                        <li><strong>Transformation fatigue:</strong> Pushing organizational change too fast without adequate change management</li>
+                        <li><strong>Compensation bidding wars:</strong> Unsustainable salary escalation across industry</li>
+                        <li><strong>Clearance bottlenecks:</strong> 138-day delays continuing to lose candidates to commercial sector</li>
+                        <li><strong>AI disillusionment:</strong> Overpromising capabilities leading to stakeholder backlash</li>
+                        <li><strong>Cultural resistance:</strong> Organizational antibodies blocking digital transformation</li>
+                        <li><strong>Adversary advantage:</strong> China/Russia moving faster in AI adoption and deployment</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Mitigation Strategies</h3>
+                    <ul>
+                        <li><strong>Phased transformation:</strong> Clear milestones with regular assessment and adjustment</li>
+                        <li><strong>Comprehensive value proposition:</strong> Beyond salary - mission, technology, stability, development</li>
+                        <li><strong>Clearance pipeline investments:</strong> Partnerships with government to accelerate processing</li>
+                        <li><strong>Realistic AI expectations:</strong> Pilots demonstrating value before scaling</li>
+                        <li><strong>Executive-driven culture change:</strong> CEO-level ownership with visible commitment</li>
+                        <li><strong>Accelerated capability development:</strong> Urgent focus on AI development and deployment</li>
+                        <li><strong>Industry collaboration:</strong> Working together on shared challenges (clearances, standards, best practices)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusion -->
+        <div class="slide" data-slide="15">
+            <h2>The Window for Action is Narrow</h2>
+            <div style="max-width: 1100px; margin: 0 auto;">
+                <p class="subtitle">By 2028, industry leaders will have pulled decisively ahead</p>
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div class="card">
+                        <h3>1. Executive Leadership</h3>
+                        <p>CEO-level ownership driving transformation across the organization</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. Mission Focus</h3>
+                        <p>Purpose as primary motivator, not just compensation - meaningful work over bureaucracy</p>
+                    </div>
+                </div>
+                <div class="grid-3" style="margin-top: 20px;">
+                    <div class="card">
+                        <h3>3. Quality of Work</h3>
+                        <p>Give technical talent meaningful technical problems to solve, not PowerPoint duty</p>
+                    </div>
+                    <div class="card">
+                        <h3>4. Systematic Approach</h3>
+                        <p>Treat workforce transformation as strategic imperative with dedicated resources</p>
+                    </div>
+                    <div class="card">
+                        <h3>5. Ecosystem Collaboration</h3>
+                        <p>Partner with DoD, academia, and industry on shared challenges</p>
+                    </div>
+                </div>
+                <div style="margin-top: 50px; text-align: center; padding: 40px; background: rgba(255,255,255,0.95); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+                    <p class="highlight" style="font-size: 2em; margin-bottom: 20px;">CACI's AI workforce transformation will define our competitive position in the $832 billion+ defense market</p>
+                    <p style="font-size: 1.4em; color: #424242;">With 24,000 employees and deep intelligence community expertise, we have the foundation to lead</p>
+                    <p style="font-size: 1.8em; margin-top: 30px; color: #003A70; font-weight: 500;">The time to act is now.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <span class="slide-counter" id="slideCounter">1 / 15</span>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 15;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            if (n > totalSlides) currentSlide = totalSlides;
+            if (n < 1) currentSlide = 1;
+
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index + 1 === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index + 1 < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+
+            // Initialize charts when slides become active
+            if (currentSlide === 3) {
+                setTimeout(() => initDisplacementChart(), 100);
+            }
+            if (currentSlide === 7) {
+                setTimeout(() => initSalaryChart(), 100);
+            }
+            if (currentSlide === 11) {
+                setTimeout(() => initMarketGrowthChart(), 100);
+            }
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Displacement Risk Chart
+        function initDisplacementChart() {
+            const container = d3.select('#displacementChart');
+            container.selectAll('*').remove(); // Clear previous chart
+
+            const containerWidth = container.node().getBoundingClientRect().width;
+            const margin = {top: 40, right: 30, bottom: 100, left: 200};
+            const width = containerWidth - margin.left - margin.right;
+            const height = 450 - margin.top - margin.bottom;
+
+            const data = [
+                {role: 'Test Engineers & QA', risk: 70, color: '#d32f2f'},
+                {role: 'Logistics Coordinators', risk: 65, color: '#d32f2f'},
+                {role: 'Cybersecurity (Entry-Level)', risk: 60, color: '#f57c00'},
+                {role: 'Config Management', risk: 45, color: '#f57c00'},
+                {role: 'Intelligence Analysts', risk: 40, color: '#f57c00'},
+                {role: 'Network Engineers', risk: 35, color: '#f57c00'},
+                {role: 'Defense Consultants', risk: 30, color: '#f57c00'},
+                {role: 'Systems Engineers', risk: 30, color: '#f57c00'},
+                {role: 'Software Developers', risk: 20, color: '#388e3c'},
+                {role: 'DevOps Engineers', risk: 15, color: '#388e3c'},
+                {role: 'Maintenance Technicians', risk: 10, color: '#388e3c'}
+            ];
+
+            const svg = container.append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const y = d3.scaleBand()
+                .domain(data.map(d => d.role))
+                .range([0, height])
+                .padding(0.2);
+
+            const x = d3.scaleLinear()
+                .domain([0, 100])
+                .range([0, width]);
+
+            // Bars
+            svg.selectAll('.bar')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar')
+                .attr('y', d => y(d.role))
+                .attr('x', 0)
+                .attr('height', y.bandwidth())
+                .attr('width', 0)
+                .attr('fill', d => d.color)
+                .attr('opacity', 0.9)
+                .attr('rx', 4)
+                .transition()
+                .duration(1000)
+                .delay((d, i) => i * 80)
+                .attr('width', d => x(d.risk));
+
+            // Add percentage labels
+            svg.selectAll('.label')
+                .data(data)
+                .enter()
+                .append('text')
+                .attr('class', 'label')
+                .attr('y', d => y(d.role) + y.bandwidth() / 2)
+                .attr('x', d => x(d.risk) + 10)
+                .attr('dominant-baseline', 'middle')
+                .attr('fill', '#424242')
+                .attr('font-size', '14px')
+                .attr('font-weight', '500')
+                .attr('opacity', 0)
+                .text(d => d.risk + '%')
+                .transition()
+                .duration(500)
+                .delay((d, i) => i * 80 + 1000)
+                .attr('opacity', 1);
+
+            // Y axis
+            svg.append('g')
+                .call(d3.axisLeft(y))
+                .selectAll('text')
+                .style('fill', '#424242')
+                .style('font-size', '13px');
+
+            // X axis
+            svg.append('g')
+                .attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(10).tickFormat(d => d + '%'))
+                .selectAll('text')
+                .style('fill', '#424242')
+                .style('font-size', '12px');
+
+            // X axis label
+            svg.append('text')
+                .attr('x', width / 2)
+                .attr('y', height + 50)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#424242')
+                .attr('font-size', '14px')
+                .attr('font-weight', '500')
+                .text('AI-Driven Displacement Risk (%)');
+        }
+
+        // Salary Comparison Chart
+        function initSalaryChart() {
+            const container = d3.select('#salaryChart');
+            container.selectAll('*').remove();
+
+            const containerWidth = container.node().getBoundingClientRect().width;
+            const margin = {top: 40, right: 150, bottom: 60, left: 220};
+            const width = containerWidth - margin.left - margin.right;
+            const height = 400 - margin.top - margin.bottom;
+
+            const data = [
+                {role: 'AI Engineers', defense: 123, commercial: 240},
+                {role: 'ML Engineers (Senior)', defense: 160, commercial: 220},
+                {role: 'Principal ML Engineer', defense: 183, commercial: 280},
+                {role: 'LLM Fine-Tuning (TS/SCI)', defense: 180, commercial: 200},
+                {role: 'AI Security Engineers', defense: 165, commercial: 190},
+                {role: 'Quantum-AI Engineers', defense: 200, commercial: 260}
+            ];
+
+            const svg = container.append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const y = d3.scaleBand()
+                .domain(data.map(d => d.role))
+                .range([0, height])
+                .padding(0.3);
+
+            const x = d3.scaleLinear()
+                .domain([0, 300])
+                .range([0, width]);
+
+            // Defense bars
+            svg.selectAll('.bar-defense')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar-defense')
+                .attr('x', 0)
+                .attr('y', d => y(d.role))
+                .attr('width', 0)
+                .attr('height', y.bandwidth() / 2.2)
+                .attr('fill', '#003A70')
+                .attr('opacity', 0.9)
+                .attr('rx', 3)
+                .transition()
+                .duration(1000)
+                .delay((d, i) => i * 100)
+                .attr('width', d => x(d.defense));
+
+            // Commercial bars
+            svg.selectAll('.bar-commercial')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar-commercial')
+                .attr('x', 0)
+                .attr('y', d => y(d.role) + y.bandwidth() / 2)
+                .attr('width', 0)
+                .attr('height', y.bandwidth() / 2.2)
+                .attr('fill', '#ff6f00')
+                .attr('opacity', 0.9)
+                .attr('rx', 3)
+                .transition()
+                .duration(1000)
+                .delay((d, i) => i * 100)
+                .attr('width', d => x(d.commercial));
+
+            // Defense labels
+            svg.selectAll('.label-defense')
+                .data(data)
+                .enter()
+                .append('text')
+                .attr('x', d => x(d.defense) + 5)
+                .attr('y', d => y(d.role) + y.bandwidth() / 4.4)
+                .attr('dominant-baseline', 'middle')
+                .attr('fill', '#424242')
+                .attr('font-size', '12px')
+                .attr('font-weight', '500')
+                .attr('opacity', 0)
+                .text(d => '$' + d.defense + 'K')
+                .transition()
+                .duration(500)
+                .delay((d, i) => i * 100 + 1000)
+                .attr('opacity', 1);
+
+            // Commercial labels
+            svg.selectAll('.label-commercial')
+                .data(data)
+                .enter()
+                .append('text')
+                .attr('x', d => x(d.commercial) + 5)
+                .attr('y', d => y(d.role) + 3 * y.bandwidth() / 4)
+                .attr('dominant-baseline', 'middle')
+                .attr('fill', '#424242')
+                .attr('font-size', '12px')
+                .attr('font-weight', '500')
+                .attr('opacity', 0)
+                .text(d => '$' + d.commercial + 'K')
+                .transition()
+                .duration(500)
+                .delay((d, i) => i * 100 + 1000)
+                .attr('opacity', 1);
+
+            // Y axis
+            svg.append('g')
+                .call(d3.axisLeft(y))
+                .selectAll('text')
+                .style('fill', '#424242')
+                .style('font-size', '13px');
+
+            // X axis
+            svg.append('g')
+                .attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(6).tickFormat(d => '$' + d + 'K'))
+                .selectAll('text')
+                .style('fill', '#424242')
+                .style('font-size', '12px');
+
+            // Legend
+            const legend = svg.append('g')
+                .attr('transform', `translate(${width + 20}, 20)`);
+
+            legend.append('rect')
+                .attr('width', 20)
+                .attr('height', 20)
+                .attr('fill', '#003A70')
+                .attr('opacity', 0.9)
+                .attr('rx', 3);
+
+            legend.append('text')
+                .attr('x', 30)
+                .attr('y', 15)
+                .attr('fill', '#424242')
+                .attr('font-size', '14px')
+                .text('Defense');
+
+            legend.append('rect')
+                .attr('y', 35)
+                .attr('width', 20)
+                .attr('height', 20)
+                .attr('fill', '#ff6f00')
+                .attr('opacity', 0.9)
+                .attr('rx', 3);
+
+            legend.append('text')
+                .attr('x', 30)
+                .attr('y', 50)
+                .attr('fill', '#424242')
+                .attr('font-size', '14px')
+                .text('Commercial Tech');
+        }
+
+        // Market Growth Chart
+        function initMarketGrowthChart() {
+            const container = d3.select('#marketGrowthChart');
+            container.selectAll('*').remove();
+
+            const containerWidth = container.node().getBoundingClientRect().width;
+            const margin = {top: 50, right: 100, bottom: 60, left: 80};
+            const width = containerWidth - margin.left - margin.right;
+            const height = 350 - margin.top - margin.bottom;
+
+            const data = [
+                {year: 2024, value: 55.2},
+                {year: 2025, value: 79.3},
+                {year: 2026, value: 113.9},
+                {year: 2027, value: 163.6},
+                {year: 2028, value: 123.8}
+            ];
+
+            const svg = container.append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear()
+                .domain([2024, 2028])
+                .range([0, width]);
+
+            const y = d3.scaleLinear()
+                .domain([0, 180])
+                .range([height, 0]);
+
+            // Area under curve
+            const area = d3.area()
+                .x(d => x(d.year))
+                .y0(height)
+                .y1(d => y(d.value))
+                .curve(d3.curveMonotoneX);
+
+            svg.append('path')
+                .datum(data)
+                .attr('fill', '#003A70')
+                .attr('opacity', 0.2)
+                .attr('d', area);
+
+            // Line
+            const line = d3.line()
+                .x(d => x(d.year))
+                .y(d => y(d.value))
+                .curve(d3.curveMonotoneX);
+
+            const path = svg.append('path')
+                .datum(data)
+                .attr('fill', 'none')
+                .attr('stroke', '#003A70')
+                .attr('stroke-width', 3)
+                .attr('d', line);
+
+            const totalLength = path.node().getTotalLength();
+
+            path
+                .attr('stroke-dasharray', totalLength + ' ' + totalLength)
+                .attr('stroke-dashoffset', totalLength)
+                .transition()
+                .duration(2000)
+                .ease(d3.easeLinear)
+                .attr('stroke-dashoffset', 0);
+
+            // Points
+            svg.selectAll('.point')
+                .data(data)
+                .enter()
+                .append('circle')
+                .attr('class', 'point')
+                .attr('cx', d => x(d.year))
+                .attr('cy', d => y(d.value))
+                .attr('r', 0)
+                .attr('fill', '#003A70')
+                .attr('stroke', '#ffffff')
+                .attr('stroke-width', 2)
+                .transition()
+                .duration(500)
+                .delay((d, i) => 2000 + i * 200)
+                .attr('r', 6);
+
+            // Value labels
+            svg.selectAll('.value-label')
+                .data(data)
+                .enter()
+                .append('text')
+                .attr('class', 'value-label')
+                .attr('x', d => x(d.year))
+                .attr('y', d => y(d.value) - 15)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#424242')
+                .attr('font-size', '14px')
+                .attr('font-weight', '500')
+                .attr('opacity', 0)
+                .text(d => '$' + d.value.toFixed(1) + 'B')
+                .transition()
+                .duration(500)
+                .delay((d, i) => 2000 + i * 200)
+                .attr('opacity', 1);
+
+            // X axis
+            svg.append('g')
+                .attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('d')))
+                .selectAll('text')
+                .style('fill', '#424242')
+                .style('font-size', '14px');
+
+            // Y axis
+            svg.append('g')
+                .call(d3.axisLeft(y).ticks(6).tickFormat(d => '$' + d + 'B'))
+                .selectAll('text')
+                .style('fill', '#424242')
+                .style('font-size', '12px');
+
+            // Title
+            svg.append('text')
+                .attr('x', width / 2)
+                .attr('y', -20)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#424242')
+                .attr('font-size', '16px')
+                .attr('font-weight', '500')
+                .text('Defense AI Market Growth (2024-2028)');
+
+            // Y axis label
+            svg.append('text')
+                .attr('transform', 'rotate(-90)')
+                .attr('y', -60)
+                .attr('x', -height / 2)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#424242')
+                .attr('font-size', '14px')
+                .text('Market Value (Billions USD)');
+        }
+
+        // Initialize first slide
+        showSlide(1);
+    </script>
+</body>
+</html>
