@@ -1,5 +1,5 @@
-# Use a lightweight Nginx base image
-FROM nginx:alpine
+# Use Nginx base image (Debian-based for Dokploy compatibility)
+FROM nginx:latest
 
 # Copy the presentation HTML file to the Nginx web root
 COPY presentation-caci.html /usr/share/nginx/html/index.html
