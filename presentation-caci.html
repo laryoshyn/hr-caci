@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CACI AI Workforce Transformation Strategy 2025-2028</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto Condensed', sans-serif;
             background: #f5f5f5;
             color: #212121;
             overflow: hidden;
@@ -235,7 +235,7 @@
             font-size: 1em;
             font-weight: 500;
             transition: all 0.3s ease;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto Condensed', sans-serif;
         }
 
         .nav-btn:hover {
@@ -395,6 +395,294 @@
         strong {
             color: #212121;
             font-weight: 500;
+        }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .slide {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 10px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+
+            h3 {
+                font-size: 1.15em;
+                margin-bottom: 10px;
+            }
+
+            h4 {
+                font-size: 1em;
+                margin-bottom: 6px;
+            }
+
+            p, ul {
+                font-size: 0.9em;
+                line-height: 1.5;
+                margin-bottom: 10px;
+            }
+
+            li {
+                margin-bottom: 6px;
+                padding-left: 18px;
+                font-size: 0.85em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+                margin-bottom: 15px;
+            }
+
+            .stat-box {
+                padding: 15px;
+                margin: 8px 0;
+            }
+
+            .stat-number {
+                font-size: 1.8em;
+            }
+
+            .stat-label {
+                font-size: 0.85em;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-top: 10px;
+            }
+
+            .card {
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+
+            .card-compact {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+
+            .role-title {
+                font-size: 1em;
+            }
+
+            .role-description {
+                font-size: 0.85em;
+            }
+
+            .badge {
+                font-size: 0.75em;
+                padding: 3px 8px;
+                margin: 2px 2px 2px 0;
+            }
+
+            .navigation {
+                bottom: 15px;
+                padding: 8px 12px;
+                gap: 10px;
+                border-radius: 20px;
+            }
+
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+                border-radius: 15px;
+            }
+
+            .slide-counter {
+                font-size: 0.85em;
+            }
+
+            .chart-container {
+                padding: 15px;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+
+            .scrollable-content {
+                max-height: calc(100vh - 150px);
+                padding-right: 5px;
+            }
+
+            .salary-range {
+                font-size: 0.8em;
+                padding: 4px 8px;
+            }
+
+            .progress-bar {
+                height: 20px;
+                margin: 10px 0;
+            }
+
+            .progress-fill {
+                font-size: 0.75em;
+                padding: 0 8px;
+            }
+
+            /* Chart responsive adjustments */
+            svg {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .axis text {
+                font-size: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slide {
+                padding: 15px 10px;
+            }
+
+            h1 {
+                font-size: 1.4em;
+                margin-bottom: 8px;
+            }
+
+            h2 {
+                font-size: 1.25em;
+                margin-bottom: 12px;
+            }
+
+            h3 {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+
+            h4 {
+                font-size: 0.9em;
+            }
+
+            p, ul {
+                font-size: 0.8em;
+                line-height: 1.4;
+            }
+
+            li {
+                font-size: 0.75em;
+                padding-left: 15px;
+            }
+
+            .subtitle {
+                font-size: 0.95em;
+                margin-bottom: 12px;
+            }
+
+            .stat-box {
+                padding: 12px;
+                margin: 6px 0;
+            }
+
+            .stat-number {
+                font-size: 1.5em;
+            }
+
+            .stat-label {
+                font-size: 0.75em;
+            }
+
+            .card {
+                padding: 12px;
+            }
+
+            .card-compact {
+                padding: 10px;
+            }
+
+            .role-title {
+                font-size: 0.9em;
+            }
+
+            .role-description {
+                font-size: 0.75em;
+            }
+
+            .badge {
+                font-size: 0.7em;
+                padding: 2px 6px;
+            }
+
+            .navigation {
+                bottom: 10px;
+                padding: 6px 10px;
+                gap: 8px;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+
+            .slide-counter {
+                font-size: 0.75em;
+            }
+
+            .chart-container {
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .scrollable-content {
+                max-height: calc(100vh - 120px);
+            }
+
+            .axis text {
+                font-size: 8px;
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media screen and (max-width: 768px) and (orientation: landscape) {
+            .slide {
+                padding: 10px 15px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .scrollable-content {
+                max-height: calc(100vh - 100px);
+            }
+        }
+
+        /* Tablet optimization */
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .slide {
+                padding: 30px 40px;
+            }
+
+            h1 {
+                font-size: 2.4em;
+            }
+
+            h2 {
+                font-size: 1.9em;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-number {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
@@ -1357,9 +1645,18 @@
             container.selectAll('*').remove(); // Clear previous chart
 
             const containerWidth = container.node().getBoundingClientRect().width;
-            const margin = {top: 40, right: 30, bottom: 100, left: 200};
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+
+            const margin = isSmallMobile
+                ? {top: 20, right: 15, bottom: 60, left: 100}
+                : isMobile
+                ? {top: 30, right: 20, bottom: 80, left: 120}
+                : {top: 40, right: 30, bottom: 100, left: 200};
+
             const width = containerWidth - margin.left - margin.right;
-            const height = 450 - margin.top - margin.bottom;
+            const baseHeight = isSmallMobile ? 350 : isMobile ? 400 : 450;
+            const height = baseHeight - margin.top - margin.bottom;
 
             const data = [
                 {role: 'Test Engineers & QA', risk: 70, color: '#d32f2f'},
@@ -1432,23 +1729,23 @@
                 .call(d3.axisLeft(y))
                 .selectAll('text')
                 .style('fill', '#424242')
-                .style('font-size', '13px');
+                .style('font-size', isSmallMobile ? '9px' : isMobile ? '10px' : '13px');
 
             // X axis
             svg.append('g')
                 .attr('transform', `translate(0,${height})`)
-                .call(d3.axisBottom(x).ticks(10).tickFormat(d => d + '%'))
+                .call(d3.axisBottom(x).ticks(isMobile ? 5 : 10).tickFormat(d => d + '%'))
                 .selectAll('text')
                 .style('fill', '#424242')
-                .style('font-size', '12px');
+                .style('font-size', isSmallMobile ? '9px' : isMobile ? '10px' : '12px');
 
             // X axis label
             svg.append('text')
                 .attr('x', width / 2)
-                .attr('y', height + 50)
+                .attr('y', height + (isSmallMobile ? 40 : isMobile ? 45 : 50))
                 .attr('text-anchor', 'middle')
                 .attr('fill', '#424242')
-                .attr('font-size', '14px')
+                .attr('font-size', isSmallMobile ? '11px' : isMobile ? '12px' : '14px')
                 .attr('font-weight', '500')
                 .text('AI-Driven Displacement Risk (%)');
         }
@@ -1459,9 +1756,18 @@
             container.selectAll('*').remove();
 
             const containerWidth = container.node().getBoundingClientRect().width;
-            const margin = {top: 40, right: 150, bottom: 60, left: 220};
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+
+            const margin = isSmallMobile
+                ? {top: 20, right: 60, bottom: 50, left: 110}
+                : isMobile
+                ? {top: 30, right: 80, bottom: 55, left: 140}
+                : {top: 40, right: 150, bottom: 60, left: 220};
+
             const width = containerWidth - margin.left - margin.right;
-            const height = 400 - margin.top - margin.bottom;
+            const baseHeight = isSmallMobile ? 350 : isMobile ? 380 : 400;
+            const height = baseHeight - margin.top - margin.bottom;
 
             const data = [
                 {role: 'AI Engineers', defense: 123, commercial: 240},
@@ -1564,47 +1870,50 @@
                 .call(d3.axisLeft(y))
                 .selectAll('text')
                 .style('fill', '#424242')
-                .style('font-size', '13px');
+                .style('font-size', isSmallMobile ? '9px' : isMobile ? '10px' : '13px');
 
             // X axis
             svg.append('g')
                 .attr('transform', `translate(0,${height})`)
-                .call(d3.axisBottom(x).ticks(6).tickFormat(d => '$' + d + 'K'))
+                .call(d3.axisBottom(x).ticks(isMobile ? 4 : 6).tickFormat(d => '$' + d + 'K'))
                 .selectAll('text')
                 .style('fill', '#424242')
-                .style('font-size', '12px');
+                .style('font-size', isSmallMobile ? '9px' : isMobile ? '10px' : '12px');
 
             // Legend
             const legend = svg.append('g')
-                .attr('transform', `translate(${width + 20}, 20)`);
+                .attr('transform', `translate(${width + (isSmallMobile ? 10 : isMobile ? 15 : 20)}, 20)`);
+
+            const legendSize = isSmallMobile ? 15 : isMobile ? 18 : 20;
+            const legendFontSize = isSmallMobile ? '11px' : isMobile ? '12px' : '14px';
 
             legend.append('rect')
-                .attr('width', 20)
-                .attr('height', 20)
+                .attr('width', legendSize)
+                .attr('height', legendSize)
                 .attr('fill', '#003A70')
                 .attr('opacity', 0.9)
                 .attr('rx', 3);
 
             legend.append('text')
-                .attr('x', 30)
-                .attr('y', 15)
+                .attr('x', legendSize + 5)
+                .attr('y', legendSize * 0.75)
                 .attr('fill', '#424242')
-                .attr('font-size', '14px')
+                .attr('font-size', legendFontSize)
                 .text('Defense');
 
             legend.append('rect')
-                .attr('y', 35)
-                .attr('width', 20)
-                .attr('height', 20)
+                .attr('y', legendSize + 10)
+                .attr('width', legendSize)
+                .attr('height', legendSize)
                 .attr('fill', '#ff6f00')
                 .attr('opacity', 0.9)
                 .attr('rx', 3);
 
             legend.append('text')
-                .attr('x', 30)
-                .attr('y', 50)
+                .attr('x', legendSize + 5)
+                .attr('y', legendSize + 10 + legendSize * 0.75)
                 .attr('fill', '#424242')
-                .attr('font-size', '14px')
+                .attr('font-size', legendFontSize)
                 .text('Commercial Tech');
         }
 
@@ -1614,9 +1923,18 @@
             container.selectAll('*').remove();
 
             const containerWidth = container.node().getBoundingClientRect().width;
-            const margin = {top: 50, right: 100, bottom: 60, left: 80};
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+
+            const margin = isSmallMobile
+                ? {top: 35, right: 20, bottom: 50, left: 60}
+                : isMobile
+                ? {top: 40, right: 40, bottom: 55, left: 70}
+                : {top: 50, right: 100, bottom: 60, left: 80};
+
             const width = containerWidth - margin.left - margin.right;
-            const height = 350 - margin.top - margin.bottom;
+            const baseHeight = isSmallMobile ? 280 : isMobile ? 320 : 350;
+            const height = baseHeight - margin.top - margin.bottom;
 
             const data = [
                 {year: 2024, value: 55.2},
@@ -1718,38 +2036,53 @@
                 .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('d')))
                 .selectAll('text')
                 .style('fill', '#424242')
-                .style('font-size', '14px');
+                .style('font-size', isSmallMobile ? '10px' : isMobile ? '12px' : '14px');
 
             // Y axis
             svg.append('g')
-                .call(d3.axisLeft(y).ticks(6).tickFormat(d => '$' + d + 'B'))
+                .call(d3.axisLeft(y).ticks(isMobile ? 5 : 6).tickFormat(d => '$' + d + 'B'))
                 .selectAll('text')
                 .style('fill', '#424242')
-                .style('font-size', '12px');
+                .style('font-size', isSmallMobile ? '9px' : isMobile ? '10px' : '12px');
 
             // Title
-            svg.append('text')
-                .attr('x', width / 2)
-                .attr('y', -20)
-                .attr('text-anchor', 'middle')
-                .attr('fill', '#424242')
-                .attr('font-size', '16px')
-                .attr('font-weight', '500')
-                .text('Defense AI Market Growth (2024-2028)');
+            if (!isSmallMobile) {
+                svg.append('text')
+                    .attr('x', width / 2)
+                    .attr('y', isMobile ? -15 : -20)
+                    .attr('text-anchor', 'middle')
+                    .attr('fill', '#424242')
+                    .attr('font-size', isMobile ? '13px' : '16px')
+                    .attr('font-weight', '500')
+                    .text('Defense AI Market Growth (2024-2028)');
+            }
 
             // Y axis label
-            svg.append('text')
-                .attr('transform', 'rotate(-90)')
-                .attr('y', -60)
-                .attr('x', -height / 2)
-                .attr('text-anchor', 'middle')
-                .attr('fill', '#424242')
-                .attr('font-size', '14px')
-                .text('Market Value (Billions USD)');
+            if (!isSmallMobile) {
+                svg.append('text')
+                    .attr('transform', 'rotate(-90)')
+                    .attr('y', isMobile ? -50 : -60)
+                    .attr('x', -height / 2)
+                    .attr('text-anchor', 'middle')
+                    .attr('fill', '#424242')
+                    .attr('font-size', isMobile ? '11px' : '14px')
+                    .text(isMobile ? 'Market Value (B)' : 'Market Value (Billions USD)');
+            }
         }
 
         // Initialize first slide
         showSlide(1);
+
+        // Reinitialize charts on window resize for responsive behavior
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (currentSlide === 3) initDisplacementChart();
+                if (currentSlide === 7) initSalaryChart();
+                if (currentSlide === 11) initMarketGrowthChart();
+            }, 250);
+        });
     </script>
 </body>
 </html>
